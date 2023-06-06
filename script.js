@@ -15,29 +15,43 @@ function init() {
 }
 
 function render() {
-    let tableHTML = '<table>';
-    for (let i = 0; i < 3; i++) {
-        tableHTML += '<tr>';
-        for (let j = 0; j < 3; j++) {
-            let index = i * 3 + j;
-            let fieldValue = fields[index];
+  let tableHTML = '<table>';
+  for (let i = 0; i < 3; i++) {
+    tableHTML += '<tr>';
+    for (let j = 0; j < 3; j++) {
+      let index = i * 3 + j;
+      let fieldValue = fields[index];
 
-            tableHTML += '<td>';
+      tableHTML += '<td onclick="handleClick(this)">';
 
-            if (fieldValue === 'circle') {
-                tableHTML += generateCircleSVG();
-            } else if (fieldValue === 'cross') {
-                tableHTML += generateCrossSVG();
-            }
+      if (fieldValue === 'circle') {
+        tableHTML += generateCircleSVG();
+      } else if (fieldValue === 'cross') {
+        tableHTML += generateCrossSVG();
+      }
 
-            tableHTML += '</td>';
-        }
-        tableHTML += '</tr>';
+      tableHTML += '</td>';
     }
-    tableHTML += '</table>';
+    tableHTML += '</tr>';
+  }
+  tableHTML += '</table>';
 
-    let contentDiv = document.getElementById('content');
-    contentDiv.innerHTML = tableHTML;
+  let contentDiv = document.getElementById('content');
+  contentDiv.innerHTML = tableHTML;
+}
+
+function handleClick(td) {
+  let index = Array.from(td.parentNode.children).indexOf(td);
+  if (fields[index] === null) {
+    if (fields.filter((field) => field !== null).length % 2 === 0) {
+      fields[index] = 'circle';
+      td.innerHTML = generateCircleSVG();
+    } else {
+      fields[index] = 'cross';
+      td.innerHTML = generateCrossSVG();
+    }
+    td.onclick = null;
+  }
 }
 
 function generateCircleSVG() {
