@@ -44,18 +44,25 @@ function generateCircleSVG() {
     const color = "#00B0EF";
     const width = 70;
     const height = 70;
+    const strokeWidth = 10;
+    const animationDuration = 300;
+  
+    const radius = (width - strokeWidth) / 2;
+    const circumference = 2 * Math.PI * radius;
+    const dashArray = `${circumference} ${circumference}`;
+    const dashOffset = circumference;
   
     const svgCode = `
       <svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
-        <circle cx="${width/2}" cy="${height/2}" r="${width/2}" fill="${color}">
-          <animate attributeName="r" values="0;${width/2}" dur="300ms" begin="0s" fill="freeze" />
+        <circle cx="${width / 2}" cy="${height / 2}" r="${radius}" fill="none" stroke="${color}" stroke-width="${strokeWidth}" stroke-dasharray="${dashArray}" stroke-dashoffset="${dashOffset}">
+          <animate attributeName="stroke-dashoffset" from="${dashOffset}" to="0" dur="${animationDuration}ms" begin="0s" fill="freeze" />
         </circle>
       </svg>
     `;
   
     return svgCode;
   }
-  
+
   function generateCrossSVG() {
     const color = "#FFC000";
     const width = 70;
