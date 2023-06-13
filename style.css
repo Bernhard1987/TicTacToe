@@ -61,6 +61,22 @@ td:hover {
     background-color: rgba(255,255,255,0.3);
 }
 
+.winner {
+    position: relative;
+  }
+  
+  .winner::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background-color: red; /* Farbe der Linie anpassen */
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
 tr:first-child td {
     border-top: none;
 }

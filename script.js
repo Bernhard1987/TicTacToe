@@ -59,6 +59,33 @@ function handleClick(index) {
       currentPlayer = 'circle';
     }
   }
+  checkWinner();
+}
+
+function checkWinner() {
+  const winningCombinations = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Horizontale Gewinnkombinationen
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Vertikale Gewinnkombinationen
+    [0, 4, 8], [2, 4, 6] // Diagonale Gewinnkombinationen
+  ];
+
+  for (const combination of winningCombinations) {
+    const [a, b, c] = combination;
+
+    if (fields[a] && fields[a] === fields[b] && fields[a] === fields[c]) {
+      // Gewinner gefunden!
+      const winningSymbols = [a, b, c];
+
+      for (const symbol of winningSymbols) {
+        const cellElement = document.getElementById(`cell-${symbol}`);
+        cellElement.classList.add('winner');
+      }
+
+      return true;
+    }
+  }
+
+  return false;
 }
 
 function generateCircleSVG() {
