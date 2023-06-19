@@ -13,7 +13,10 @@ let fields = [
 let currentPlayer = 'circle';
 
 function init() {
+  
   render();
+  document.getElementById('HeaderCircle').innerHTML = generateCircleSVG();
+  document.getElementById('HeaderCross').innerHTML = generateCrossSVG();
 }
 
 function renderField(index) {
@@ -44,7 +47,7 @@ function render() {
   }
   tableHTML += '</table>';
 
-  let contentDiv = document.getElementById('content');
+  let contentDiv = document.getElementById('tableBackground');
   contentDiv.innerHTML = tableHTML;
 }
 
@@ -78,14 +81,24 @@ function checkWinner() {
 
       for (const symbol of winningSymbols) {
         const cellElement = document.getElementById(`cell-${symbol}`);
-        cellElement.classList.add('winner');
+        drawWinnerLines(winningSymbols, cellElement);
       }
-
       return true;
     }
   }
 
   return false;
+}
+
+function drawWinnerLines(winningCombination, cellElement) {
+  cellElement.classList.add('winner');
+  if (winningCombination == [0, 3, 6] || winningCombination == [1, 4, 7] || winningCombination == [2, 5, 8]) {
+    cellElement.classList.add('winnerVertical');
+  } else if (winningCombination == [0, 4, 8]) {
+    cellElement.classList.add('winnerDiagonalLeftRight');
+  } else if (winningCombination == [2, 4, 6]) {
+    cellElement.classList.add('winnerDiagonalRightLeft');
+  }
 }
 
 function generateCircleSVG() {
