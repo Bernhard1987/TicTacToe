@@ -10,13 +10,14 @@ let fields = [
   null,
 ];
 
-let currentPlayer = 'circle';
+let currentPlayer = 'cross';
 
 function init() {
   
   render();
   document.getElementById('HeaderCircle').innerHTML = generateCircleSVG();
   document.getElementById('HeaderCross').innerHTML = generateCrossSVG();
+  document.getElementById('winnerCross').innerHTML = generateCircleSVG();
 }
 
 function renderField(index) {
@@ -92,11 +93,12 @@ function checkWinner() {
 
 function drawWinnerLines(winningCombination, cellElement) {
   cellElement.classList.add('winner');
-  if (winningCombination == [0, 3, 6] || winningCombination == [1, 4, 7] || winningCombination == [2, 5, 8]) {
+  JSON.stringify(winningCombination);
+  if (winningCombination === [0, 3, 6] || winningCombination === [1, 4, 7] || winningCombination === [2, 5, 8]) {
     cellElement.classList.add('winnerVertical');
-  } else if (winningCombination == [0, 4, 8]) {
+  } else if (winningCombination === [0, 4, 8]) {
     cellElement.classList.add('winnerDiagonalLeftRight');
-  } else if (winningCombination == [2, 4, 6]) {
+  } else if (winningCombination === [2, 4, 6]) {
     cellElement.classList.add('winnerDiagonalRightLeft');
   }
 }

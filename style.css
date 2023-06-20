@@ -1,3 +1,12 @@
+/* space-mono-regular - latin */
+@font-face {
+    font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+    font-family: 'Space Mono';
+    font-style: normal;
+    font-weight: 400;
+    src: url('./fonts/space-mono-v12-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
 body {
     background-color: #323232;
     font-family: "Open Sans", sans-serif;
@@ -8,6 +17,7 @@ body {
     background-repeat: none;
     background-position: center;
     background-size: cover;
+    font-family: 'Space mono';
 }
 
 header {
@@ -16,6 +26,7 @@ header {
     position: absolute;
     left: 0;
     right: 0;
+    top: 0;
     height: 100px;
     background-color: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(4px);
@@ -53,6 +64,10 @@ h2 {
     justify-content: center;
     align-items: center;
     height: 100dvh;
+}
+
+.dnone {
+    display: none !important;
 }
 
 .tableBackground {
@@ -110,15 +125,15 @@ td:first-child {
     z-index: 1;
   }
 
-  .winnerVertical {
+  .winnerVertical::after {
     transform: rotate(90deg);
   }
 
-  .winnerDiagonalLeftRight {
+  .winnerDiagonalLeftRight::after {
     transform: rotate(45deg);
   }
 
-  .winnerDiagonalRightLeft {
+  .winnerDiagonalRightLeft::after {
     transform: rotate(-45deg);
   }
 
@@ -138,4 +153,54 @@ td:first-child {
     box-shadow: 1px 2px 8px rgba(0, 0, 0, 0.4);
     font-size: 12px;
     text-align: center;
+  }
+
+  .winnerDialog {
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .winnerDialogMessage {
+    height: 360px;
+    width: 360px;
+    padding: 14px;
+    background-color: rgba(255,255,255,0.2);
+    border-radius: 12px;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    font-weight: 700;
+    font-size: 24px;
+    text-align: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+  }
+
+  button {
+    width: 200px;
+    height: 40px;
+    font-family: 'Space Mono';
+    font-weight: 700;
+    color: white;
+    text-shadow: 1px 1px 4px rgb(0, 176, 239);
+    border-radius: 6px;
+    border: 0;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+    background-color: black;
+  }
+
+  button:hover {
+    cursor: pointer;
+    transform: scale(1.05);
+    transition-duration: 0.3s;
   }
