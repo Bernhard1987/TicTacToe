@@ -11,9 +11,14 @@ let fields = [
 ];
 
 let currentPlayer = 'cross';
+let PLAYER_CIRCLE_SOUND = new Audio('./sounds/player_circle.mp3');
+let PLAYER_CROSS_SOUND = new Audio('./sounds/player_cross.mp3');
+let WIN_SOUND = new Audio('./sounds/win.mp3');
+let START_NEW_GAME_SOUND = new Audio('./sounds/start_new_game.mp3');
 
 function init() {
   render();
+  START_NEW_GAME_SOUND.play();
   document.getElementById('HeaderCircle').innerHTML = generateCircleSVG();
   document.getElementById('HeaderCross').innerHTML = generateCrossSVG();
 }
@@ -56,8 +61,10 @@ function handleClick(index) {
     renderField(index);
 
     if (currentPlayer === 'circle') {
+      PLAYER_CIRCLE_SOUND.play();
       currentPlayer = 'cross';
     } else {
+      PLAYER_CROSS_SOUND.play();
       currentPlayer = 'circle';
     }
   }
@@ -67,6 +74,7 @@ function handleClick(index) {
 function checkWinnerDialog() {
   if (checkWinner() == true) {
     document.getElementById('winnerDialog').classList.remove('dnone');
+    WIN_SOUND.play();
     if (currentPlayer == 'cross') {
       document.getElementById('winnerSymbol').innerHTML = generateCircleSVG();
     } else {
@@ -96,7 +104,6 @@ function checkWinner() {
       return true;
     }
   }
-
   return false;
 }
 
