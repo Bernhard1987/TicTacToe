@@ -80,7 +80,7 @@ function checkWinnerDialog() {
     } else {
       document.getElementById('winnerSymbol').innerHTML = generateCrossSVG();
     }
-  };
+  } else if (checkWinner());
 }
 
 function checkWinner() {
@@ -99,24 +99,41 @@ function checkWinner() {
 
       for (const symbol of winningSymbols) {
         const cellElement = document.getElementById(`cell-${symbol}`);
-        drawWinnerLines(winningSymbols, cellElement);
       }
+      drawWinnerLines(winningSymbols);
       return true;
     }
   }
   return false;
 }
 
-function drawWinnerLines(winningCombination, cellElement) {
-  cellElement.classList.add('winner');
-  JSON.stringify(winningCombination);
-  if (winningCombination === [0, 3, 6] || winningCombination === [1, 4, 7] || winningCombination === [2, 5, 8]) {
-    cellElement.classList.add('winnerVertical');
-  } else if (winningCombination === [0, 4, 8]) {
-    cellElement.classList.add('winnerDiagonalLeftRight');
-  } else if (winningCombination === [2, 4, 6]) {
-    cellElement.classList.add('winnerDiagonalRightLeft');
-  }
+function drawWinnerLines(combination) {
+  const lineColor = '#ffffff';
+  const lineWidth = 5;
+
+  const startCell = document.querySelectorAll(`td`)[combination[0]];
+  const endCell = document.querySelectorAll(`td`)[combination[2]];
+  const startRect = startCell.getBoundingClientRect();
+  const endRect = endCell.getBoundingClientRect();
+
+  const contentRect = document.getElementById('tableBackground').getBoundingClientRect();
+
+  const lineLength = Math.sqrt(Math.pow(endRect.left - startRect.left, 2) + Math.pow(endRect.top - startRect.top, 2));
+  const lineAngle = Math.atan2(endRect.top - startRect.top, endRect.left - startRect.left);
+
+  const line = document.createElement('div');
+  line.style.position = 'absolute';
+  line.style.width = `${lineLength}px`;
+  line.style.height = `${lineWidth}px`;
+  line.style.backgroundColor = lineColor;
+  line.style.top = `${startRect.top + startRect.height / 2 - lineWidth / 2}px`;
+  line.style.left = `${startRect.left + startRect.width / 2}px`;
+  line.style.transform = `rotate(${lineAngle}rad)`;
+  line.style.top = `${startRect.top + startRect.height / 2 - lineWidth / 2 - contentRect.top}px`;
+  line.style.left = `${startRect.left + startRect.width / 2 - contentRect.left}px`;
+  line.style.transform = `rotate(${lineAngle}rad)`;
+  line.style.transformOrigin = `top left`;
+  document.getElementById('tableBackground').appendChild(line);
 }
 
 function resetGame() {
