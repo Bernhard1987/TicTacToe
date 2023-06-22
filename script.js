@@ -13,11 +13,9 @@ let fields = [
 let currentPlayer = 'cross';
 
 function init() {
-  
   render();
   document.getElementById('HeaderCircle').innerHTML = generateCircleSVG();
   document.getElementById('HeaderCross').innerHTML = generateCrossSVG();
-  document.getElementById('winnerCross').innerHTML = generateCircleSVG();
 }
 
 function renderField(index) {
@@ -63,7 +61,18 @@ function handleClick(index) {
       currentPlayer = 'circle';
     }
   }
-  checkWinner();
+  checkWinnerDialog();
+}
+
+function checkWinnerDialog() {
+  if (checkWinner() == true) {
+    document.getElementById('winnerDialog').classList.remove('dnone');
+    if (currentPlayer == 'cross') {
+      document.getElementById('winnerSymbol').innerHTML = generateCircleSVG();
+    } else {
+      document.getElementById('winnerSymbol').innerHTML = generateCrossSVG();
+    }
+  };
 }
 
 function checkWinner() {
@@ -101,6 +110,23 @@ function drawWinnerLines(winningCombination, cellElement) {
   } else if (winningCombination === [2, 4, 6]) {
     cellElement.classList.add('winnerDiagonalRightLeft');
   }
+}
+
+function resetGame() {
+  fields = [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+  ];
+  currentPlayer = 'cross';
+  document.getElementById('winnerDialog').classList.add('dnone');
+  init();
 }
 
 function generateCircleSVG() {
