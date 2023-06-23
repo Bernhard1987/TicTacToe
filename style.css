@@ -1,17 +1,15 @@
-/* space-mono-regular - latin */
+/* quicksand-regular - latin */
 @font-face {
-  font-display: swap;
-  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
-  font-family: 'Space Mono';
+  font-display: swap; /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: 'Quicksand';
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/space-mono-v12-latin-regular.woff2') format('woff2');
-  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  src: url('./fonts/quicksand-v30-latin-regular.woff2') format('woff2'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
 
 body {
   background-color: #323232;
-  font-family: "Open Sans", sans-serif;
+  font-family: "Quicksand", sans-serif;
   margin: 0;
   color: white;
   overflow: hidden;
@@ -19,7 +17,6 @@ body {
   background-repeat: none;
   background-position: center;
   background-size: cover;
-  font-family: 'Space mono';
 }
 
 header {
@@ -205,13 +202,13 @@ footer {
   padding: 12px;
   background-color: rgba(0, 0, 0, 0.95);
   box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
-  margin-top: 13px;
+  margin-top: 18px;
 }
 
 button {
   width: 200px;
   height: 40px;
-  font-family: 'Space Mono';
+  font-family: "Quicksand", sans-serif;
   font-weight: 700;
   color: white;
   text-shadow: 1px 1px 4px rgb(0, 176, 239);
