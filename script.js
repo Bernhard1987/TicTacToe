@@ -68,19 +68,23 @@ function handleClick(index) {
       currentPlayer = 'circle';
     }
   }
-  checkWinnerDialog();
+  isGameFinished();
+}
+
+function isGameFinished() {
+  if (fields.every ((field) => field !== null) && checkWinner() == false) {
+    document.getElementById('undecidedDialog').classList.remove('dnone');
+  } else {
+    checkWinnerDialog();
+  }
 }
 
 function checkWinnerDialog() {
   if (checkWinner() == true) {
     document.getElementById('winnerDialog').classList.remove('dnone');
     WIN_SOUND.play();
-    if (currentPlayer == 'cross') {
-      document.getElementById('winnerSymbol').innerHTML = generateCircleSVG();
-    } else {
-      document.getElementById('winnerSymbol').innerHTML = generateCrossSVG();
-    }
-  } else if (checkWinner());
+    drawWinnerOnWinnerDialog();
+  };
 }
 
 function checkWinner() {
@@ -105,6 +109,14 @@ function checkWinner() {
     }
   }
   return false;
+}
+
+function drawWinnerOnWinnerDialog() {
+  if (currentPlayer == 'cross') {
+    document.getElementById('winnerSymbol').innerHTML = generateCircleSVG();
+  } else {
+    document.getElementById('winnerSymbol').innerHTML = generateCrossSVG();
+  }
 }
 
 function drawWinnerLines(combination) {
@@ -150,6 +162,7 @@ function resetGame() {
   ];
   currentPlayer = 'cross';
   document.getElementById('winnerDialog').classList.add('dnone');
+  document.getElementById('undecidedDialog').classList.add('dnone');
   init();
 }
 
